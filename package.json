@@ -1,0 +1,15 @@
+{
+  "name": "com.postenot.eventbus",
+  "version": "0.0.1",
+  "displayName": "Event Bus",
+  "description": "",
+  "author": {
+    "name": "PostEnot",
+    "email": "ve.vyshegorodsky.cold@gmail.com",
+    "url": "https://t.me/ProcyonNihil"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.18.0"
+  },
+  "type": "library"
+}
