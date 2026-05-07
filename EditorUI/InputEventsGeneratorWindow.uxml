@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Packages/IUP_Toolkits/Scripts/Editor/UxmlUss/FileField.uss?fileID=7433441132597879392&amp;guid=4b04b1dc03187b348bc9055c929f2dea&amp;type=3#FileField"/>
+    <ui:Label text="&lt;b&gt;Input Action Asset&lt;/b&gt;" style="margin-top: 13px;"/>
+    <uie:ObjectField label="Asset" name="inputAssetField" type="UnityEngine.InputSystem.InputActionAsset, Unity.InputSystem" class="unity-base-field__aligned unity-base-field__inspector-field"/>
+    <ui:Label text="&lt;b&gt;Events&lt;/b&gt;" name="" class="unity-header-drawer__label" style="margin-top: 13px;"/>
+    <PostEnot.Toolkits.Editor.UIElements.FileField label="C# Class FIle" save-in-project="true" file-panel-extension="cs" name="eventsFileField" placeholder="Enter file path..." class="unity-base-field__inspector-field unity-base-field__aligned"/>
+    <PostEnot.Toolkits.Editor.UIElements.TypeNameField name="eventsTypeNameField" label="Type Name" placeholder="Enter type name..." class="unity-base-field__inspector-field unity-base-field__aligned"/>
+    <ui:Label text="&lt;b&gt;Wrapper&lt;/b&gt;" class="unity-header-drawer__label" style="margin-top: 13px;"/>
+    <PostEnot.Toolkits.Editor.UIElements.FileField label="C# Class FIle" save-in-project="true" name="wrapperFileField" file-panel-extension="cs" placeholder="Enter file path..." class="unity-base-field__inspector-field unity-base-field__aligned"/>
+    <PostEnot.Toolkits.Editor.UIElements.TypeNameField label="Type Name" placeholder="Enter type name..." name="wrapperTypeNameField" class="unity-base-field__inspector-field unity-base-field__aligned"/>
+    <ui:Button text="Generate code" name="generateCodeButton"/>
+</ui:UXML>
