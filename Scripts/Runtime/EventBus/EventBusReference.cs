@@ -8,7 +8,7 @@ namespace PostEnot.Toolkits.EventManagement
     /// Предоставляет доступ к шине событий (<see cref="IEventBus"/>) через ассет типа <see cref="ScriptableObject"/>.
     /// Используется для протягивания зависимостей и предоставления доступа к единой шине событий через отображаемые в инспекторе поля.
     /// </summary>
-    [CreateAssetMenu(fileName = "EventBusReference", menuName = "PostEnot/System/Event Bus Reference")]
+    [CreateAssetMenu(fileName = "EventBusReference", menuName = "PostEnot/Event Bus Reference")]
     public sealed class EventBusReference : ScriptableObject
     {
         #region EditorOnly
