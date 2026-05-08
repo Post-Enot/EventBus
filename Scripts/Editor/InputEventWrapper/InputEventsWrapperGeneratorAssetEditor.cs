@@ -10,7 +10,10 @@ namespace PostEnot.Toolkits.EventManagement.Editor
     [CustomEditor(typeof(InputEventsWrapperGeneratorAsset))]
     internal sealed class InputEventsWrapperGeneratorAssetEditor : UnityEditor.Editor
     {
-        [SerializeField] private VisualTreeAsset _visualTreeAsset;
+        #region Inspector
+        [SerializeField] private VisualTreeAsset visualTreeAsset;
+        [SerializeField] private StyleSheet styleSheetAsset;
+        #endregion
 
         private ObjectField _inputAssetField;
         private FileField _eventsFileField;
@@ -31,7 +34,10 @@ namespace PostEnot.Toolkits.EventManagement.Editor
 
             InputActionAsset inputActionAsset = inputActionAssetProperty.objectReferenceValue as InputActionAsset;
 
-            var root = _visualTreeAsset.Instantiate();
+            VisualElement root = new();
+            visualTreeAsset.CloneTree(root);
+            root.styleSheets.Add(styleSheetAsset);
+
             _inputAssetField = root.Q<ObjectField>("inputAssetField");
             _eventsFileField = root.Q<FileField>("eventsFileField");
             _eventsTypeNameField = root.Q<TypeNameField>("eventsTypeNameField");

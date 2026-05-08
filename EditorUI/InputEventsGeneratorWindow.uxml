@@ -1,5 +1,4 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/Packages/IUP_Toolkits/Scripts/Editor/UxmlUss/FileField.uss?fileID=7433441132597879392&amp;guid=4b04b1dc03187b348bc9055c929f2dea&amp;type=3#FileField"/>
     <ui:Label text="&lt;b&gt;Input Action Asset&lt;/b&gt;" style="margin-top: 13px;"/>
     <uie:ObjectField label="Asset" name="inputAssetField" type="UnityEngine.InputSystem.InputActionAsset, Unity.InputSystem" class="unity-base-field__aligned unity-base-field__inspector-field"/>
     <ui:Label text="&lt;b&gt;Events&lt;/b&gt;" name="" class="unity-header-drawer__label" style="margin-top: 13px;"/>

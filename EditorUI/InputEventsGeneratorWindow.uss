@@ -1,0 +1,12 @@
+.iup-file-field__input-container {
+    flex-direction: row;
+}
+
+.iup-file-field__input {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.iup-file-field__button {
+    margin-right: 2px;
+}
