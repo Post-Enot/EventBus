@@ -14,6 +14,8 @@ namespace PostEnot.Toolkits.EventManagement
         public ICallbacksCollection this[Type eventType] => _callbacksByType[eventType];
 
         public int Count => _callbacksByType.Count;
+        public IEnumerable<Type> EventTypes => _callbacksByType.Keys;
+        public IEnumerable<ICallbacksCollection> CallbacksCollections => _callbacksByType.Values;
 
         private readonly Dictionary<Type, CallbacksCollection> _callbacksByType;
 
@@ -57,7 +59,13 @@ namespace PostEnot.Toolkits.EventManagement
         }
 
         public bool Contains(ICallbacksCollection callbacks)
-            => callbacks is CallbacksCollection callbacksOther && _callbacksByType.ContainsValue(callbacksOther);
+        {
+            if (callbacks == null)
+            {
+                throw new ArgumentNullException(nameof(callbacks));
+            }
+            return callbacks is CallbacksCollection callbacksOther && _callbacksByType.ContainsValue(callbacksOther);
+        }
 
         public IEnumerator<KeyValuePair<Type, ICallbacksCollection>> GetEnumerator()
         {
