@@ -29,6 +29,18 @@ namespace PostEnot.Toolkits.EventManagement
             }
         }
 
+        public void UnsetLogger()
+        {
+            if (Logger == null)
+            {
+                return;
+            }
+            foreach (CallbacksCollection callbacks in _callbacksMap.Values)
+            {
+                callbacks.Logger = null;
+            }
+        }
+
         public IEventInvoker CreateInvoker()
         {
             _invoker ??= new EventInvoker(this);

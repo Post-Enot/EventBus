@@ -24,9 +24,21 @@ namespace PostEnot.Toolkits.EventManagement
         /// происходит вызов иных событий.
         /// </summary>
         public uint InvokeDepth { get; }
+        /// <summary>
+        /// Логгер, используемый для логирования исключений обратных вызовов; может иметь значение <see langword="null"/>.
+        /// </summary>
         public ILogger? Logger { get; }
 
+        /// <summary>
+        /// Устанавливает логгер, используемый для логирования исключений обратных вызовов.
+        /// </summary>
+        /// <param name="logger">Устанавливаемый логгер. Может иметь значение <see langword="null"/>.</param>
         public void SetLogger(ILogger? logger);
+
+        /// <summary>
+        /// Сбрасывает логгер, используемый для логгирования исключений обратных вызовов.
+        /// </summary>
+        public void UnsetLogger();
 
         public IEventInvoker CreateInvoker();
         public IEventReceiver CreateReceiver();
