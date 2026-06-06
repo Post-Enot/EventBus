@@ -39,6 +39,7 @@ namespace PostEnot.Toolkits.EventManagement
             {
                 callbacks.Logger = null;
             }
+            Logger = null;
         }
 
         public IEventInvoker CreateInvoker()
