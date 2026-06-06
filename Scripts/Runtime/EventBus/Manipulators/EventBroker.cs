@@ -7,8 +7,7 @@ namespace PostEnot.Toolkits.EventManagement
 {
     internal sealed class EventBroker : IEventBroker
     {
-        public EventBroker(EventBus eventBus)
-            => _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+        public EventBroker(EventBus eventBus) => _eventBus = eventBus;
 
         public bool IsEnabled { get; private set; }
         public bool IsDisabled => !IsEnabled;
