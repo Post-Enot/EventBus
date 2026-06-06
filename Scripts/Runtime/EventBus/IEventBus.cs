@@ -40,8 +40,28 @@ namespace PostEnot.Toolkits.EventManagement
         /// </summary>
         public void UnsetLogger();
 
+        /// <summary>
+        /// Создаёт инициатора событий (<see cref="IEventInvoker"/>), позволяющего вызывать события
+        /// без возможности изменения подписок. Это полезно для передачи компонентам, которые должны
+        /// только инициировать события, не имея доступа к управлению подписками.
+        /// </summary>
+        /// <returns>Экземпляр <see cref="IEventInvoker"/>, связанный с данной шиной.</returns>
         public IEventInvoker CreateInvoker();
+
+        /// <summary>
+        /// Создаёт получателя событий (<see cref="IEventReceiver"/>), предоставляющего удобное
+        /// управление подписками: регистрацию, отмену регистрации, временное отключение и полную очистку.
+        /// Полезно для группировки связанных подписок и безопасного управления их жизненным циклом.
+        /// </summary>
+        /// <returns>Новый экземпляр <see cref="IEventReceiver"/>, связанный с данной шиной.</returns>
         public IEventReceiver CreateReceiver();
+
+        /// <summary>
+        /// Создаёт брокера событий (<see cref="IEventBroker"/>), объединяющего возможности получения
+        /// и вызова событий. Это позволяет одному компоненту и подписываться на события, и инициировать их,
+        /// используя единый объект.
+        /// </summary>
+        /// <returns>Новый экземпляр <see cref="IEventBroker"/>, связанный с данной шиной.</returns>
         public IEventBroker CreateBroker();
 
         /// <summary>
