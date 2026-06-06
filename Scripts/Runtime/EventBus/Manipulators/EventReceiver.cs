@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PostEnot.Toolkits.EventManagement
 {
-    public sealed class EventReceiver : IEventReceiver
+    internal sealed class EventReceiver : IEventReceiver
     {
         public EventReceiver(EventBus eventBus) => _eventBus = eventBus;
 
