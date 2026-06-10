@@ -235,6 +235,76 @@ private void OnDestroy() => _receiver.UnregisterAll();
 
 Представляет собой объединение `IEventReceiver` и `IEventInvoker`.
 
+## Интеграция с системой ввода Unity Input System
+
+Пакет предоставляет **инкрементальный генератор исходного кода**, предназначенный для автоматического оборачивания событий, сгенерированных из **Input Actions Asset**.  
+Генератор создаёт строго типизированные структуры событий и класс-обёртку, избавляя от необходимости ручного написания однотипного кода подписки/отписки и обеспечивая полную совместимость с шиной событий пакета.
+
+### Использование
+
+1. **Настройка ассета.**
+Создайте Input Actions Asset и сгенерируйте C# класс (через опцию *Generate C# Class* в инспекторе ассета).  
+Полученный класс будет `public partial` и реализовывать `IInputActionCollection2`.
+```csharp
+// Пример сгенерированного файла.
+public partial class PlayerInputActions : IInputActionCollection2, IDisposable
+{
+    // сгенерированные поля и методы...
+}
+```
+Важно: всё содержимое сгенерированного файла перезаписывается при каждой повторной генерации, и все вносимые в него изменения будут стираться.
+
+2. **Пометьте сгенерированный класс атрибутом.**
+**Создайте отдельный файл** (например, `PlayerInputActions.WrapEvents.cs`) и поместите в него атрибут `[WrapInputEvents]` для того же partial-класса:
+```csharp
+using PostEnot.Toolkits.EventManagement.Input;
+
+[WrapInputEvents]
+public partial class PlayerInputActions { }
+```
+Таким образом атрибут не будет потерян при изменении `Input Action Asset`.
+
+Атрибут имеет четыре необязательных свойства, позволяющих управлять именами и пространствами имён генерируемых классов:
+
+* `EventsNamespace` – пространство имён для класса событий. По умолчанию совпадает с пространством имён исходного класса.
+* `EventsClassName` – имя класса событий. По умолчанию `ИмяИсходногоКласса_Events`.
+* `WrapperNamespace` – пространство имён для класса-обёртки. По умолчанию пространство имён исходного класса.
+* `WrapperClassName` – имя класса-обёртки. По умолчанию `ИмяИсходногоКласса_Wrapper`.
+
+3. **Включите переадрессацию событий ввода в шину событий.**
+
+После компиляции в проекте автоматически появятся два новых файла:
+PlayerInputActions_Events.g.cs – статический класс с вложенными структурами событий для каждой карты и фазы.
+PlayerInputActions_Wrapper.g.cs – класс-обёртка, наследующий от `InputActionsWrapperBase<PlayerInputActions>`.
+
+После генерации достаточно создать экземпляр обёртки, передав ссылку на `PlayerInputActions` и источник событий (`IEventInvoker`).
+Например, в `MonoBehaviour`:
+
+```csharp
+public sealed class PlayerInputActionsAdapter : MonoBehaviour
+{
+    #region Inspector
+    [SerializeField] private EventBusReference eventBusReference;
+    #endregion
+
+    private PlayerInputActions _inputActions;
+    private PlayerInputActions_Wrapper _wrapper;
+
+    private void Awake()
+    {
+        _inputActions = new PlayerInputActions();
+        IEventInvoker invoker = eventBusReference.EventBus.CreateInvoker();
+        _wrapper = new PlayerInputActions_Wrapper(_inputActions, invoker);
+    }
+
+    private void OnEnable() => _inputActions.Enable();
+
+    private void OnDisable() => _inputActions.Disable();
+
+    private void OnDestroy() => _wrapper.Dispose();
+}
+```
+
 ## Важные особенности реализации
 
 ### Порядок обратных вызовов событий
