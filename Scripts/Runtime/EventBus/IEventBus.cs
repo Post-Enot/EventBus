@@ -57,12 +57,30 @@ namespace PostEnot.Toolkits.EventManagement
         public IEventReceiver CreateReceiver();
 
         /// <summary>
+        /// Создаёт получателя событий (<see cref="IEventReceiver"/>), предоставляющего удобное
+        /// управление подписками: регистрацию, отмену регистрации, временное отключение и полную очистку.
+        /// Полезно для группировки связанных подписок и безопасного управления их жизненным циклом.
+        /// </summary>
+        /// <param name="isEnabled">Будет ли получатель включён.</param>
+        /// <returns>Новый экземпляр <see cref="IEventReceiver"/>, связанный с данной шиной.</returns>
+        public IEventReceiver CreateReceiver(bool isEnabled);
+
+        /// <summary>
         /// Создаёт брокера событий (<see cref="IEventBroker"/>), объединяющего возможности получения
         /// и вызова событий. Это позволяет одному компоненту и подписываться на события, и инициировать их,
         /// используя единый объект.
         /// </summary>
         /// <returns>Новый экземпляр <see cref="IEventBroker"/>, связанный с данной шиной.</returns>
         public IEventBroker CreateBroker();
+
+        /// <summary>
+        /// Создаёт брокера событий (<see cref="IEventBroker"/>), объединяющего возможности получения
+        /// и вызова событий. Это позволяет одному компоненту и подписываться на события, и инициировать их,
+        /// используя единый объект.
+        /// </summary>
+        /// <param name="isEnabled">Будет ли брокер включён.</param>
+        /// <returns>Новый экземпляр <see cref="IEventBroker"/>, связанный с данной шиной.</returns>
+        public IEventBroker CreateBroker(bool isEnabled);
 
         /// <summary>
         /// Регистрирует обратный вызов, принимающий контекст, для события типа <typeparamref name="TEvent"/>.

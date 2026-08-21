@@ -50,7 +50,21 @@ namespace PostEnot.Toolkits.EventManagement
 
         public IEventReceiver CreateReceiver() => new EventReceiver(this);
 
+        public IEventReceiver CreateReceiver(bool isEnabled)
+        {
+            IEventReceiver receiver = new EventReceiver(this);
+            receiver.Enable();
+            return receiver;
+        }
+
         public IEventBroker CreateBroker() => new EventBroker(this);
+
+        public IEventBroker CreateBroker(bool isEnabled)
+        {
+            IEventBroker broker = new EventBroker(this);
+            broker.Enable();
+            return broker;
+        }
 
         public void Invoke<TEvent>() where TEvent : new()
         {
