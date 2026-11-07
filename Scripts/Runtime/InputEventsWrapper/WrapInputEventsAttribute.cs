@@ -20,6 +20,10 @@ namespace PostEnot.Toolkits.EventManagement.Input
         /// </summary>
         public string? EventsClassName { get; set; }
         /// <summary>
+        /// Префикс, добавляемый к названию меню события.
+        /// </summary>
+        public string? EventsMenuNamePrefix { get; set; }
+        /// <summary>
         /// Пространство имён генерируемого класса-обёртки. Если не задано, используется пространство имён исходного класса.
         /// </summary>
         public string? WrapperNamespace { get; set; }
